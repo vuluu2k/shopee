@@ -1,12 +1,12 @@
 <template>
   <div style="display: contents">
-    <AppHeader />
+    <app-header />
     <div class="content">
       <div class="content-inner">
         <slot />
       </div>
     </div>
-    <AppFooter />
+    <app-footer />
   </div>
 </template>
 
