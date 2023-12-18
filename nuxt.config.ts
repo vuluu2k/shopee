@@ -15,6 +15,7 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
+  modules: ['nuxt-icon'],
   vite: {
     plugins: [svgLoader()],
   },
