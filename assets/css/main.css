@@ -2,6 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer pages {
+  .styles-input-wrapper {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 40px;
+    border: 1px solid rgba(0, 0, 0, 0.14) !important;
+    border-radius: 2px;
+    box-shadow: 2px 0 2px 0 rgba(0, 0, 0, 0.02);
+    padding: 12px;
+  }
+  .styles-input {
+    outline: none;
+    flex: 1;
+    flex-shrink: 0;
+    filter: none;
+  }
+  .error {
+    margin: 0;
+    padding: 5px 0 0;
+    font-size: 12px;
+    color: #ff424f;
+    min-height: 16px;
+  }
+}
+
 .shopee-rating-stars {
   position: relative;
   display: inline-block;
@@ -13,7 +39,7 @@
   margin-right: 1px;
 }
 
-.shopee-rating-stars__star-wrapper>.shopee-rating-stars__lit {
+.shopee-rating-stars__star-wrapper > .shopee-rating-stars__lit {
   overflow: hidden;
   position: absolute;
   height: 100%;
