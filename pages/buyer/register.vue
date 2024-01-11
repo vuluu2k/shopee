@@ -9,14 +9,15 @@
         <p class="text-[2rem] text-[#222]">Đăng kí</p>
       </div>
       <div class="px-[30px] pb-[30px] overflow-hidden">
-        <form action="">
+        <form action="" @submit.prevent="handleSunmit">
           <div class="mb-[10px]">
             <div class="styles-input-wrapper">
               <input
+                v-model="data.username"
                 type="text"
                 name="info-user"
                 class="styles-input"
-                placeholder="Tên đăng nhập"
+                placeholder="Tên đăng kí"
               />
             </div>
             <div class="error error-message"></div>
@@ -24,6 +25,7 @@
           <div class="mb-[10px]">
             <div class="styles-input-wrapper">
               <input
+                v-model="data.password"
                 :type="isTypePassword ? 'password' : 'text'"
                 name="password"
                 class="styles-input"
@@ -49,6 +51,7 @@
           <div class="mb-[10px]">
             <div class="styles-input-wrapper">
               <input
+                v-model="data.email"
                 type="text"
                 name="info-user"
                 class="styles-input"
@@ -100,10 +103,31 @@
 definePageMeta({
   layout: 'authenticate-default',
 });
+const data = {
+  username: '',
+  password: '',
+  email: '',
+};
+const handleSunmit = function () {
+  handleRegister(data);
+  // eslint-disable-next-line no-console
+  console.log(data);
+};
+// eslint-disable-next-line no-console
+console.log(data);
 const isTypePassword = ref(true);
 const changTypeInput = () => {
   isTypePassword.value = !isTypePassword.value;
 };
+async function handleRegister(data) {
+  const register = await $fetch('http://localhost:3000/api/v1/auth/register', {
+    method: 'POST',
+    body: data,
+  });
+  if (register.success) {
+    window.location.replace('http://localhost:4000/buyer/login');
+  }
+}
 </script>
 
 <style lang="scss" scoped>

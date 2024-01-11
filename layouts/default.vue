@@ -12,6 +12,7 @@
 
 <style lang="scss" scoped>
 .content {
+  margin-top: 200px;
   transition: margin-top 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   -webkit-overflow-scrolling: touch;
 
