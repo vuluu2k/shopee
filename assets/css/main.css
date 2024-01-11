@@ -7,11 +7,13 @@
   display: inline-block;
   font-size: 1.5rem;
 }
+
 .shopee-rating-stars__star-wrapper {
   position: relative;
   margin-right: 1px;
 }
-.shopee-rating-stars__star-wrapper > .shopee-rating-stars__lit {
+
+.shopee-rating-stars__star-wrapper>.shopee-rating-stars__lit {
   overflow: hidden;
   position: absolute;
   height: 100%;
@@ -19,6 +21,7 @@
   top: 0;
   z-index: 1;
 }
+
 .shopee-rating-stars__primary-star {
   color: #ee4d2d;
   stroke: #ee4d2d;
@@ -31,9 +34,11 @@
   position: relative;
   margin-right: 1px;
 }
+
 .shopee-rating-stars__stars {
   display: flex;
 }
+
 .shopee-svg-icon {
   display: inline-block;
   height: 1.6rem;
@@ -41,6 +46,7 @@
   fill: currentColor;
   position: relative;
 }
+
 .shopee-rating-stars__primary-star {
   color: #ee4d2d;
   stroke: #ee4d2d;
@@ -48,6 +54,7 @@
   position: absolute;
   left: 0;
 }
+
 .icon-free-shipping-line,
 .icon-shipping-airplane {
   font-size: 1.25rem;
@@ -62,6 +69,7 @@
   overflow: visible;
   outline: 0;
 }
+
 .shopee-input-quantity {
   background-color: #fff;
 }
@@ -77,6 +85,7 @@
   background-image: url(https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg/assets/73e1841f9b750652.png);
   background-size: 100%;
 }
+
 .page-product__detail,
 .page-product__hot-sales,
 .page-product__info,
@@ -91,10 +100,12 @@
   margin-top: 1.5rem;
   padding: 1rem;
 }
+
 .official-shop-new-badge {
   display: flex;
   justify-content: center;
 }
+
 .page-product__detail,
 .page-product__hot-sales,
 .page-product__info,

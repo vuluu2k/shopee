@@ -8,12 +8,12 @@ html {
   direction: ltr;
   unicode-bidi: isolate;
   -webkit-locale: 'vi';
-  font-size: 62.5%;
+  font-size: 16px;
 }
 
 body {
   display: block;
-  font-size: 1.4rem;
+  // font-size: 0.875rem;
   margin: 0;
   transition: opacity ease-in 0.2s;
   text-size-adjust: none;
