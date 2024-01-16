@@ -203,7 +203,7 @@ import ShopeeIcon from '@/assets/icon/shopee_icon.svg?component';
 }
 
 .navbar-wrapper {
-  height: 3.4rem;
+  height: 5.44rem;
   z-index: 400;
   background: transparent;
   position: relative;
@@ -216,9 +216,9 @@ import ShopeeIcon from '@/assets/icon/shopee_icon.svg?component';
     .navbar-item {
       color: #fff;
       text-decoration: none;
-      font-size: 1.3rem;
+      font-size: 2.08rem;
       font-weight: 300;
-      padding: 0.25rem;
+      padding: 0.4rem;
       position: relative;
       overflow: visible;
       outline: 0;
@@ -231,7 +231,7 @@ import ShopeeIcon from '@/assets/icon/shopee_icon.svg?component';
 
       &:not(:first-child)::after {
         content: '';
-        height: 1.5rem;
+        height: 2.4rem;
         width: 0;
         border-left: 1px solid hsla(0, 0%, 100%, 0.22);
         border-right: 1px solid hsla(0, 0%, 100%, 0.22);
@@ -266,8 +266,8 @@ import ShopeeIcon from '@/assets/icon/shopee_icon.svg?component';
 
   .header-with-search__logo-section {
     position: relative;
-    top: -0.1875rem;
-    padding-right: 2.5rem;
+    top: -0.3rem;
+    padding-right: 4rem;
   }
 
   .header-with-search__logo-wrapper {

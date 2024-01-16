@@ -233,7 +233,7 @@
 }
 
 .jP2PzH {
-  width: 75rem;
+  width: 120rem;
   margin: auto;
 }
 
@@ -242,7 +242,7 @@ footer {
 }
 
 ._5mVtqL {
-  min-width: 75rem;
+  min-width: 120rem;
   border-top: 4px solid #ee4d2d;
   background-color: #fff;
   color: rgba(0, 0, 0, .54);
@@ -254,8 +254,8 @@ div {
 
 .ibAPxC {
   display: flex;
-  margin: 0 -0.3125rem;
-  padding: 0.3125rem;
+  margin: 0 -0.8rem;
+  padding: 0.8rem;
   width: 100%;
   min-width: 1200px;
 }
@@ -266,17 +266,17 @@ div {
 }
 
 .PuXQrZ {
-  width: 15.625rem;
-  padding: 0.3125rem;
+  width: 25rem;
+  padding: 0.8rem;
   box-sizing: border-box;
 }
 
 .JMCbqu {
-  font-size: .75rem;
+  font-size: 1.2rem;
   font-weight: 700;
   color: rgba(0, 0, 0, .87);
-  margin-bottom: 1.25rem;
-  margin-top: 2.5rem;
+  margin-bottom: 2rem;
+  margin-top: 4rem;
 }
 
 .SOb2n7 {
@@ -284,15 +284,15 @@ div {
   display: block;
   color: rgba(0, 0, 0, .65);
   list-style-type: none;
-  margin: 0 0 1rem;
+  margin: 0 0 1.6rem;
   padding: 0;
 }
 
 ul {
   display: block;
   list-style-type: disc;
-  margin-block-start: 1em;
-  margin-block-end: 1em;
+  margin-block-start: 1.6em;
+  margin-block-end: 1.6em;
   margin-inline-start: 0px;
   margin-inline-end: 0px;
   padding-inline-start: 40px;
@@ -315,16 +315,16 @@ ul {
 }
 
 .uqMJQA {
-  width: 3.75rem;
-  height: 1.875rem;
-  margin-bottom: 0.5rem;
-  margin-right: 0.5rem;
-  padding: 0.25rem;
+  width: 6rem;
+  height: 3rem;
+  margin-bottom: 0.8rem;
+  margin-right: 0.8rem;
+  padding: 0.4rem;
   background-color: #fff;
   box-shadow: 0 1px 1px rgba(0, 0, 0, .2);
   box-sizing: border-box;
   overflow: hidden;
-  border-radius: 0.125rem;
+  border-radius: 0.2rem;
 }
 
 ._2pbE-b,
@@ -349,8 +349,8 @@ li {
 }
 
 .o8Gbgv {
-  font-size: .75rem;
-  margin-bottom: 0.75rem;
+  font-size: 1.2rem;
+  margin-bottom: 1.2rem;
 }
 
 .FA0WjS,
@@ -365,11 +365,17 @@ li {
 
 .pkg67p {
   width: 100%;
-  margin-bottom: 1rem;
+  margin-bottom: 1.6rem;
 }
 
 .pkg67p {
   flex-direction: row;
+}
+
+._6ZyW8Y {
+  height: 1.6rem;
+  width: 1.6rem;
+  margin-right: 0.8rem;
 }
 
 .pkg67p,
@@ -390,16 +396,16 @@ a {
 }
 
 .zLPzwH {
-  width: 4.75rem;
+  width: 7.6rem;
   display: inline-block;
   vertical-align: top;
 }
 
 .ebQ6br {
-  height: 5rem;
-  width: 5rem;
-  margin-right: 0.75rem;
-  padding: 0.25rem;
+  height: 8rem;
+  width: 8rem;
+  margin-right: 1.92rem;
+  padding: 0.4rem;
   background-color: #fff;
   box-shadow: 0 1px 1px rgba(0, 0, 0, .2);
   border-radius: 2px;
@@ -410,10 +416,10 @@ img {
 }
 
 .W4jGm6 {
-  width: 4.25rem;
-  height: 1rem;
-  margin-bottom: 0.5rem;
-  padding: 0.25rem;
+  width: 6.8rem;
+  height: 1.6rem;
+  margin-bottom: 1.28rem;
+  padding: 0.64rem;
   background-color: #fff;
   box-shadow: 0 1px 1px rgba(0, 0, 0, .2);
   border-radius: 2px;
@@ -478,7 +484,8 @@ a {
 }
 
 .\+iUQ15 {
-  line-height: 1.125rem;
+  line-height: 1.8rem;
+  font-size: 1.4rem;
 }
 
 .HKksoM:not(:last-child) {
@@ -495,28 +502,28 @@ a {
 }
 
 ._4FDN71 {
-  font-size: .75rem;
+  font-size: 1.2rem;
   color: rgba(0, 0, 0, .65);
-  padding: 2.625rem 0 2.3125rem;
+  padding: 4.2rem 0 3.7rem;
   background: #f5f5f5;
 }
 
 .Hyfopi {
-  width: 75rem;
+  width: 120rem;
   margin: 0 auto;
 }
 
 .EWPRwa {
   display: flex;
   justify-content: center;
-  margin-bottom: 2.5rem;
+  margin-bottom: 4rem;
 }
 
 .d56atc {
-  padding: 0 1.5625rem;
+  padding: 0 2.5rem;
   border-right: 1px solid rgba(0, 0, 0, .09);
   text-transform: uppercase;
-  font-size: .75rem;
+  font-size: 1.2rem;
 }
 
 .Dc8l4L {
@@ -535,12 +542,12 @@ a {
 ._44TnCg {
   text-decoration: none;
   color: rgba(0, 0, 0, .8);
-  margin: 0 1.25rem;
+  margin: 0 2rem;
 }
 
 .jeaJPZ {
-  width: 7.5rem;
-  height: 2.8125rem;
+  width: 12rem;
+  height: 4.5rem;
 }
 
 .footer-vn-vn_registered_red-png {
@@ -558,18 +565,18 @@ a {
 }
 
 .b1v1Th {
-  width: 3rem;
-  height: 3rem;
+  width: 4.8rem;
+  height: 4.8rem;
 }
 
 .ggg4D- {
-  margin-bottom: 1.5625rem;
+  margin-bottom: 2.5rem;
 }
 
 .BV2E6Y {
   display: block;
   width: 100%;
   text-align: center;
-  margin-top: 0.5rem;
+  margin-top: 1.28rem;
 }
 </style>
