@@ -9,6 +9,7 @@ import mall_icon from '@/assets/icon/mall_icon.svg?component';
 import heart_icon from '@/assets/icon/heart_icon.svg?component';
 import star_fill_icon from '@/assets/icon/star_fill_icon.svg?component';
 import icon_loading_image from '@/assets/icon/icon_loading_image.svg?component';
+import like_button from '@/assets/icon/like_button.svg?component';
 
 const route = useRoute();
 const { slug } = route.params;
@@ -17,10 +18,10 @@ const { data } = await useFetch(
   `http://127.0.0.1:8000/api/v1/products/${slug}`,
 );
 console.log(data.value);
-const { star_rating, name, price, feedbacks, variations } = data.value;
+const { name, price, feedbacks, variations } = data.value;
 
 const feedbackCount = feedbacks.length;
-const thumbnails = data.value.thumbnails.split(',').map(s => s.trim());
+const images = data.value.images.map(s => s.trim());
 </script>
 
 <template>
@@ -34,9 +35,9 @@ const thumbnails = data.value.thumbnails.split(',').map(s => s.trim());
           </div>
           <div class="mt-4">
             <div class="last:mr-0">
-              <div v-for="(thumbnail, index) in thumbnails" :key="index" class="inline-block box-border w-1/5 mr-2"
-                :class="{ 'mr-0': index === thumbnails.length - 1 }">
-                <img :src="thumbnail" :alt="`thumbnail-${index}`" style="width: 100px; height: auto" />
+              <div v-for="(image, index) in images" :key="index" class="inline-block box-border w-1/5 mr-2"
+                :class="{ 'mr-0': index === images.length - 1 }">
+                <img :src="image" :alt="`image-${index}`" style="width: 100px; height: auto" />
               </div>
             </div>
           </div>
@@ -597,20 +598,17 @@ const thumbnails = data.value.thumbnails.split(',').map(s => s.trim());
                             <div class="rating-media-list">
                               <div class="rating-media-list__container">
                                 <div class="rating-media-list__image-wrapper rating-media-list__image-wrapper--inactive">
-                                  <div
-                                    v-for="(image, attachmentIndex) in feedback.attachment.split(',').map(s => s.trim())"
-                                    :key="`attachment-${attachmentIndex}`"
-                                    class="shopee-rating-media-list-image__wrapper">
+                                  <div class="shopee-rating-media-list-image__wrapper">
                                     <div class="shopee-rating-media-list-image__place-holder">
                                       <icon_loading_image />
                                     </div>
                                     <div class="shopee-rating-media-list-image__content"
-                                      :style="{ backgroundImage: `url('${image}')` }">
-                                      <div class="shopee-rating-media-list-image__content--blur"></div>
+                                      style="background-image: url(&quot;https://down-bs-sg.img.susercontent.com/vn-11110103-7r98o-lp6pm8wfy60d64&quot;);">
+                                      <div class="shopee-rating-media-list-image__content--blur"> </div>
                                     </div>
                                   </div>
-                                  <div class="rating-media-list__video-cover">
-                                    <svg width="23" height="18" viewBox="0 0 23 18" fill="none">
+                                  <div class="rating-media-list__video-cover"><svg width="23" height="18"
+                                      viewBox="0 0 23 18" fill="none">
                                       <g filter="url(#filter0_d)">
                                         <path fill-rule="evenodd" clip-rule="evenodd"
                                           d="M5 4C4.44772 4 4 4.44772 4 5V13C4 13.5523 4.44772 14 5 14H13C13.5523 14 14 13.5523 14 13V5C14 4.44772 13.5523 4 13 4H5ZM11.5 9C11.5 10.3807 10.3807 11.5 9 11.5C7.61929 11.5 6.5 10.3807 6.5 9C6.5 7.61929 7.61929 6.5 9 6.5C10.3807 6.5 11.5 7.61929 11.5 9ZM9 10.6667C9.92047 10.6667 10.6667 9.92047 10.6667 9C10.6667 8.07952 9.92047 7.33333 9 7.33333C8.07953 7.33333 7.33333 8.07952 7.33333 9C7.33333 9.92047 8.07953 10.6667 9 10.6667ZM18.1667 4.83333L14.8333 7.33306V10.6667L18.1667 13.1667V4.83333Z"
@@ -625,114 +623,88 @@ const thumbnails = data.value.thumbnails.split(',').map(s => s.trim());
                                           <feOffset></feOffset>
                                           <feGaussianBlur stdDeviation="2"></feGaussianBlur>
                                           <feColorMatrix type="matrix"
-                                            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.26 0">
-                                          </feColorMatrix>
+                                            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.26 0"></feColorMatrix>
                                           <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow">
                                           </feBlend>
                                           <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow"
-                                            result="shape">
-                                          </feBlend>
+                                            result="shape"></feBlend>
                                         </filter>
                                       </defs>
-                                    </svg><span>0:07</span>
+                                    </svg>
+                                    <span>0:07</span>
                                   </div>
                                 </div>
-                                <div class="rating-media-list__image-wrapper rating-media-list__image-wrapper--inactive">
+                                <div v-for="(image, attachmentIndex) in feedback.attachment.split(',').map(s => s.trim())"
+                                  :key="`attachment-${attachmentIndex}`"
+                                  class="rating-media-list__image-wrapper rating-media-list__image-wrapper--inactive">
                                   <div class="shopee-rating-media-list-image__wrapper">
                                     <div class="shopee-rating-media-list-image__place-holder">
                                       <icon_loading_image />
                                     </div>
-                                    <div class="shopee-rating-media-list-image__content" style="
-                                      background-image: url('https://down-bs-vn.img.susercontent.com/vn-11134103-7r98o-lp6pifabsg2687_tn.webp');
-                                    ">
+                                    <div class="shopee-rating-media-list-image__content"
+                                      :style="{ backgroundImage: `url('${image}')` }">
                                       <div class="shopee-rating-media-list-image__content--blur"></div>
                                     </div>
                                   </div>
                                 </div>
+
                               </div>
-                              <div class="rating-media-list__zoomed-image">
-                                <div class="rating-media-list-image-carousel" style="transition: all 0ms ease 0s">
+                              <!-- <div class="rating-media-list__zoomed-image">
+                                <div class="rating-media-list-image-carousel" style="transition: all 0ms ease 0s;">
                                   <div class="rating-media-list-image-carousel__item-list-wrapper">
-                                    <ul class="rating-media-list-image-carousel__item-list" style="
-                                      margin-top: 0px;
-                                      transform: translateX(0px);
-                                      transition: all 0ms ease 0s;
-                                    ">
-                                      <!-- video -->
-                                      <!-- <li
-                                        class="rating-media-list-image-carousel__item rating-media-list-image-carousel__item--fluid"
-                                        style="padding: 0px 0.625rem">
-                                        <div class="yc2MHR">
-                                          <video
-                                            src="https://down-cvs-sg.vod.susercontent.com/api/v4/11110103/mms/vn-11110103-6ke15-lp6pm6dpmlhq91.default.mp4"
-                                            controls="" class="k9wD+V rating-media-list__zoomed-video-item"
-                                            controlslist="nodownload"></video>
-                                        </div>
-                                      </li> -->
+                                    <ul class="rating-media-list-image-carousel__item-list"
+                                      style="margin-top: 0px; transform: translateX(0px); transition: all 0ms ease 0s;">
                                       <li
-                                        v-for="(image, attachmentIndex) in feedback.attachment.split(',').map(s => s.trim())"
-                                        :key="`attachment-${attachmentIndex}`"
                                         class="rating-media-list-image-carousel__item rating-media-list-image-carousel__item--fluid"
-                                        style="padding: 0px 0.625rem">
-                                        <img :src="image" alt="rating" class="rating-media-list__zoomed-image-item" />
+                                        style="padding: 0px 0.625rem;">
+                                        <div class="YknRSx"><video
+                                            src="https://down-cvs-sg.vod.susercontent.com/api/v4/11110103/mms/vn-11110103-6ke15-lp6pm6dpmlhq91.default.mp4"
+                                            controls="" class="o5ubXd rating-media-list__zoomed-video-item"
+                                            controlslist="nodownload"></video></div>
                                       </li>
+                                      <li
+                                        class="rating-media-list-image-carousel__item rating-media-list-image-carousel__item--fluid"
+                                        style="padding: 0px 0.625rem;"><img
+                                          src="https://down-bs-vn.img.susercontent.com/vn-11134103-7r98o-lp6pifabsg2687.webp"
+                                          alt="rating" class="rating-media-list__zoomed-image-item"></li>
+                                      <li
+                                        class="rating-media-list-image-carousel__item rating-media-list-image-carousel__item--fluid"
+                                        style="padding: 0px 0.625rem;"><img
+                                          src="https://down-bs-vn.img.susercontent.com/vn-11134103-7r98o-lp6pifac7wb2fd.webp"
+                                          alt="rating" class="rating-media-list__zoomed-image-item"></li>
+                                      <li
+                                        class="rating-media-list-image-carousel__item rating-media-list-image-carousel__item--fluid"
+                                        style="padding: 0px 0.625rem;"><img
+                                          src="https://down-bs-vn.img.susercontent.com/vn-11134103-7r98o-lp6pifabsfh71c.webp"
+                                          alt="rating" class="rating-media-list__zoomed-image-item"></li>
                                     </ul>
                                   </div>
                                   <div
                                     class="rating-media-list-carousel-arrow rating-media-list-carousel-arrow--prev rating-media-list-carousel-arrow--hint rating-media-list-carousel-arrow--hidden"
-                                    role="button" tabindex="0" style="
-                                    opacity: 1;
-                                    visibility: hidden;
-                                    transform: translateX(calc(-50% + 0px));
-                                  ">
-                                    <svg enable-background="new 0 0 13 20" viewBox="0 0 13 20" x="0" y="0"
+                                    role="button" tabindex="0"
+                                    style="opacity: 1; visibility: hidden; transform: translateX(calc(-50% + 0px));"><svg
+                                      enable-background="new 0 0 13 20" viewBox="0 0 13 20" x="0" y="0"
                                       class="shopee-svg-icon icon-arrow-left-bold">
                                       <polygon points="4.2 10 12.1 2.1 10 -.1 1 8.9 -.1 10 1 11 10 20 12.1 17.9">
                                       </polygon>
-                                    </svg>
-                                  </div>
+                                    </svg></div>
                                   <div
                                     class="rating-media-list-carousel-arrow rating-media-list-carousel-arrow--next rating-media-list-carousel-arrow--hint"
-                                    role="button" tabindex="0" style="
-                                    opacity: 1;
-                                    visibility: visible;
-                                    transform: translateX(calc(50% + 0px));
-                                  ">
-                                    <svg enable-background="new 0 0 13 21" viewBox="0 0 13 21" x="0" y="0"
+                                    role="button" tabindex="0"
+                                    style="opacity: 1; visibility: visible; transform: translateX(calc(50% + 0px));"><svg
+                                      enable-background="new 0 0 13 21" viewBox="0 0 13 21" x="0" y="0"
                                       class="shopee-svg-icon icon-arrow-right-bold">
                                       <polygon points="11.1 9.9 2.1 .9 -.1 3.1 7.9 11 -.1 18.9 2.1 21 11.1 12 12.1 11">
                                       </polygon>
-                                    </svg>
-                                  </div>
+                                    </svg></div>
                                 </div>
-                              </div>
+                              </div> -->
                             </div>
                           </div>
                           <div class="shopee-product-rating__actions" style="justify-content: space-between">
                             <div style="display: flex">
                               <div class="shopee-product-rating__like-button">
-                                <svg width="14px" height="13px" viewBox="0 0 14 13" version="1.1"
-                                  xmlns="http://www.w3.org/2000/svg">
-                                  <defs></defs>
-                                  <g stroke="none" stroke-width="1" fill-rule="evenodd">
-                                    <g id="Product-Ratings-Working" transform="translate(-245.000000, -855.000000)"
-                                      fill-rule="nonzero">
-                                      <g transform="translate(155.000000, 92.000000)">
-                                        <g transform="translate(40.000000, 184.000000)">
-                                          <g transform="translate(0.000000, 326.000000)">
-                                            <g transform="translate(50.000000, 253.000000)">
-                                              <g>
-                                                <path
-                                                  d="M0,12.7272727 L2.54545455,12.7272727 L2.54545455,5.09090909 L0,5.09090909 L0,12.7272727 Z M14,5.72727273 C14,5.02727273 13.4272727,4.45454545 12.7272727,4.45454545 L8.71818182,4.45454545 L9.35454545,1.52727273 L9.35454545,1.33636364 C9.35454545,1.08181818 9.22727273,0.827272727 9.1,0.636363636 L8.4,0 L4.2,4.2 C3.94545455,4.39090909 3.81818182,4.70909091 3.81818182,5.09090909 L3.81818182,11.4545455 C3.81818182,12.1545455 4.39090909,12.7272727 5.09090909,12.7272727 L10.8181818,12.7272727 C11.3272727,12.7272727 11.7727273,12.4090909 11.9636364,11.9636364 L13.8727273,7.44545455 C13.9363636,7.31818182 13.9363636,7.12727273 13.9363636,7 L13.9363636,5.72727273 L14,5.72727273 C14,5.79090909 14,5.72727273 14,5.72727273 Z">
-                                                </path>
-                                              </g>
-                                            </g>
-                                          </g>
-                                        </g>
-                                      </g>
-                                    </g>
-                                  </g>
-                                </svg>
+                                <like_button />
                               </div>
                               <div class="shopee-product-rating__like-count">
                                 hữu ích?
@@ -1212,4 +1184,5 @@ const thumbnails = data.value.thumbnails.split(',').map(s => s.trim());
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;
-}</style>
+}
+</style>
