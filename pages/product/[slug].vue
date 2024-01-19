@@ -1,4 +1,6 @@
 <script setup>
+import { defineProps, ref, onMounted } from 'vue';
+
 import freeship_icon from '@/assets/icon/freeship_icon.svg?component';
 import arrow_down_icon from '@/assets/icon/arrow_down_icon.svg?component';
 import plus_icon from '@/assets/icon/plus_icon.svg?component';
@@ -10,6 +12,7 @@ import heart_icon from '@/assets/icon/heart_icon.svg?component';
 import star_fill_icon from '@/assets/icon/star_fill_icon.svg?component';
 import icon_loading_image from '@/assets/icon/icon_loading_image.svg?component';
 import like_button from '@/assets/icon/like_button.svg?component';
+import arrow_left_icon from '@/assets/icon/arrow_left_icon.svg?component';
 
 const route = useRoute();
 const { slug } = route.params;
@@ -22,6 +25,24 @@ const { name, price, feedbacks, variations } = data.value;
 
 const feedbackCount = feedbacks.length;
 const images = data.value.images.map(s => s.trim());
+
+const groupedVariations = ref([]);
+
+onMounted(() => {
+  const groups = {};
+  data.value.variations.forEach(variation => {
+    variation.tier_variation.forEach(tierVariation => {
+      if (!groups[tierVariation.name]) {
+        groups[tierVariation.name] = {
+          name: tierVariation.name,
+          variations: [],
+        };
+      }
+      groups[tierVariation.name].variations.push(variation);
+    });
+  });
+  groupedVariations.value = Object.values(groups);
+});
 </script>
 
 <template>
@@ -159,90 +180,18 @@ const images = data.value.images.map(s => s.trim());
             </section>
             <div class="flex mb-0 last:mb-0 pb-3.75">
               <div class="flex flex-col">
-                <section class="flex items-center" style="margin-bottom: 24px; align-items: baseline">
+                <section v-for="(group, index) in groupedVariations" :key="index" class="flex items-center"
+                  style="margin-bottom: 24px; align-items: baseline">
                   <h3
                     class="text-[#757575] w-[110px] capitalize flex-shrink-0 items-center font-normal m-0 w-40 px-4 mt-4">
-                    Phân loại
+                    {{ group.name }}
                   </h3>
                   <div
                     class="flex items-center flex flex-wrap overflow-y-auto mt-[-8px] w-[515px] max-w-[515px] max-h-[220px]">
-                    <button class="hUWqqt text-[rgba(0,0,0,.26)] bg-[#fafafa] cursor-not-allowed" aria-label="Balo đen"
+                    <button v-for="(variation, variationIndex) in group.variations" :key="variationIndex"
+                      class="hUWqqt text-[rgba(0,0,0,.26)] bg-[#fafafa] cursor-not-allowed" :aria-label="variation.name"
                       aria-disabled="true">
-                      Balo đen</button><button class="hUWqqt text-[rgba(0,0,0,.26)] bg-[#fafafa] cursor-not-allowed"
-                      aria-label="Balo trắng" aria-disabled="true">
-                      Balo trắng</button><button class="hUWqqt text-[rgba(0,0,0,.26)] bg-[#fafafa] cursor-not-allowed"
-                      aria-label="Balo xanh dương" aria-disabled="true">
-                      Balo xanh dương</button><button
-                      class="hUWqqt text-[rgba(0,0,0,.26)] bg-[#fafafa] cursor-not-allowed" aria-label="Balo xanh lá"
-                      aria-disabled="true">
-                      Balo xanh lá</button><button class="hUWqqt text-[rgba(0,0,0,.26)] bg-[#fafafa] cursor-not-allowed"
-                      aria-label="Đen + hải âu" aria-disabled="true">
-                      Đen + hải âu</button><button class="hUWqqt text-[rgba(0,0,0,.26)] bg-[#fafafa] cursor-not-allowed"
-                      aria-label="Đen + bò sữa" aria-disabled="true">
-                      Đen + bò sữa</button><button class="hUWqqt text-[rgba(0,0,0,.26)] bg-[#fafafa] cursor-not-allowed"
-                      aria-label="Đen + vịt trắng" aria-disabled="true">
-                      Đen + vịt trắng</button><button
-                      class="hUWqqt text-[rgba(0,0,0,.26)] bg-[#fafafa] cursor-not-allowed" aria-label="Đen + ếch xanh"
-                      aria-disabled="true">
-                      Đen + ếch xanh</button><button class="hUWqqt text-[rgba(0,0,0,.26)] bg-[#fafafa] cursor-not-allowed"
-                      aria-label="Đen + gấu trắng" aria-disabled="true">
-                      Đen + gấu trắng</button><button
-                      class="hUWqqt text-[rgba(0,0,0,.26)] bg-[#fafafa] cursor-not-allowed" aria-label="Đen + gấu nâu"
-                      aria-disabled="true">
-                      Đen + gấu nâu</button><button class="hUWqqt text-[rgba(0,0,0,.26)] bg-[#fafafa] cursor-not-allowed"
-                      aria-label="Trắng + hải âu" aria-disabled="true">
-                      Trắng + hải âu</button><button class="hUWqqt text-[rgba(0,0,0,.26)] bg-[#fafafa] cursor-not-allowed"
-                      aria-label="Trắng + bò sữa" aria-disabled="true">
-                      Trắng + bò sữa</button><button class="hUWqqt text-[rgba(0,0,0,.26)] bg-[#fafafa] cursor-not-allowed"
-                      aria-label="Trắng + vịt trắng" aria-disabled="true">
-                      Trắng + vịt trắng</button><button
-                      class="hUWqqt text-[rgba(0,0,0,.26)] bg-[#fafafa] cursor-not-allowed" aria-label="Trắng + ếch xanh"
-                      aria-disabled="true">
-                      Trắng + ếch xanh</button><button
-                      class="hUWqqt text-[rgba(0,0,0,.26)] bg-[#fafafa] cursor-not-allowed" aria-label="Trắng + gấu trắng"
-                      aria-disabled="true">
-                      Trắng + gấu trắng</button><button
-                      class="hUWqqt text-[rgba(0,0,0,.26)] bg-[#fafafa] cursor-not-allowed" aria-label="Trắng + gấu nâu"
-                      aria-disabled="true">
-                      Trắng + gấu nâu</button><button
-                      class="hUWqqt text-[rgba(0,0,0,.26)] bg-[#fafafa] cursor-not-allowed"
-                      aria-label="Xanh dương + hải âu" aria-disabled="true">
-                      Xanh dương + hải âu</button><button
-                      class="hUWqqt text-[rgba(0,0,0,.26)] bg-[#fafafa] cursor-not-allowed"
-                      aria-label="Xanh dương + bò sữa" aria-disabled="true">
-                      Xanh dương + bò sữa</button><button
-                      class="hUWqqt text-[rgba(0,0,0,.26)] bg-[#fafafa] cursor-not-allowed"
-                      aria-label="Xanh dươg +vịt trắng" aria-disabled="true">
-                      Xanh dươg +vịt trắng</button><button
-                      class="hUWqqt text-[rgba(0,0,0,.26)] bg-[#fafafa] cursor-not-allowed"
-                      aria-label="Xanh dương +ếch xanh" aria-disabled="true">
-                      Xanh dương +ếch xanh</button><button
-                      class="hUWqqt text-[rgba(0,0,0,.26)] bg-[#fafafa] cursor-not-allowed"
-                      aria-label="Xanh dươg +gấu trắng" aria-disabled="true">
-                      Xanh dươg +gấu trắng</button><button
-                      class="hUWqqt text-[rgba(0,0,0,.26)] bg-[#fafafa] cursor-not-allowed"
-                      aria-label="Xanh dương + gấu nâu" aria-disabled="true">
-                      Xanh dương + gấu nâu</button><button
-                      class="hUWqqt text-[rgba(0,0,0,.26)] bg-[#fafafa] cursor-not-allowed" aria-label="Xanh lá + hải âu"
-                      aria-disabled="true">
-                      Xanh lá + hải âu</button><button
-                      class="hUWqqt text-[rgba(0,0,0,.26)] bg-[#fafafa] cursor-not-allowed" aria-label="Xanh lá + bò sữa"
-                      aria-disabled="true">
-                      Xanh lá + bò sữa</button><button
-                      class="hUWqqt text-[rgba(0,0,0,.26)] bg-[#fafafa] cursor-not-allowed"
-                      aria-label="Xanh lá + vịt trắng" aria-disabled="true">
-                      Xanh lá + vịt trắng</button><button
-                      class="hUWqqt text-[rgba(0,0,0,.26)] bg-[#fafafa] cursor-not-allowed"
-                      aria-label="Xanh lá + ếch xanh" aria-disabled="true">
-                      Xanh lá + ếch xanh</button><button
-                      class="hUWqqt text-[rgba(0,0,0,.26)] bg-[#fafafa] cursor-not-allowed"
-                      aria-label="Xanh lá + gấu trắng" aria-disabled="true">
-                      Xanh lá + gấu trắng</button><button
-                      class="hUWqqt text-[rgba(0,0,0,.26)] bg-[#fafafa] cursor-not-allowed" aria-label="Xanh lá + gấu nâu"
-                      aria-disabled="true">
-                      Xanh lá + gấu nâu</button><button class="hUWqqt" aria-label="Gói hút ẩm" aria-disabled="false">
-                      Gói hút ẩm</button><button class="hUWqqt" aria-label="Túi hút ẩm" aria-disabled="false">
-                      Túi hút ẩm
+                      {{ variation.tier_variation[0].options[0] }}
                     </button>
                   </div>
                 </section>
@@ -545,23 +494,10 @@ const images = data.value.images.map(s => s.trim());
                   <div class="shopee-product-comment-list">
                     <div v-for="(feedback, index) in   feedbacks  " :key="index">
                       <div class="shopee-product-rating">
-                        <div class="shopee-product-rating__avatar">
-                          <div class="shopee-avatar">
-                            <div class="shopee-avatar__placeholder">
-                              <svg enable-background="new 0 0 15 15" viewBox="0 0 15 15" x="0" y="0"
-                                class="shopee-svg-icon icon-headshot">
-                                <g>
-                                  <circle cx="7.5" cy="4.5" fill="none" r="3.8" stroke-miterlimit="10"></circle>
-                                  <path d="m1.5 14.2c0-3.3 2.7-6 6-6s6 2.7 6 6" fill="none" stroke-linecap="round"
-                                    stroke-miterlimit="10"></path>
-                                </g>
-                              </svg>
-                            </div>
-                          </div>
-                        </div>
+                        <Avatar :value="feedback.user.avatar" />
                         <div class="shopee-product-rating__main">
                           <div class="shopee-product-rating__author-name">
-                            {{ feedback.user }}
+                            {{ feedback.user.username }}
                           </div>
                           <div class="repeat-purchase-con">
                             <div class="shopee-product-rating__rating">
@@ -647,101 +583,50 @@ const images = data.value.images.map(s => s.trim());
                                     </div>
                                   </div>
                                 </div>
-
                               </div>
-                              <!-- <div class="rating-media-list__zoomed-image">
-                                <div class="rating-media-list-image-carousel" style="transition: all 0ms ease 0s;">
-                                  <div class="rating-media-list-image-carousel__item-list-wrapper">
-                                    <ul class="rating-media-list-image-carousel__item-list"
-                                      style="margin-top: 0px; transform: translateX(0px); transition: all 0ms ease 0s;">
-                                      <li
-                                        class="rating-media-list-image-carousel__item rating-media-list-image-carousel__item--fluid"
-                                        style="padding: 0px 0.625rem;">
-                                        <div class="YknRSx"><video
-                                            src="https://down-cvs-sg.vod.susercontent.com/api/v4/11110103/mms/vn-11110103-6ke15-lp6pm6dpmlhq91.default.mp4"
-                                            controls="" class="o5ubXd rating-media-list__zoomed-video-item"
-                                            controlslist="nodownload"></video></div>
-                                      </li>
-                                      <li
-                                        class="rating-media-list-image-carousel__item rating-media-list-image-carousel__item--fluid"
-                                        style="padding: 0px 0.625rem;"><img
-                                          src="https://down-bs-vn.img.susercontent.com/vn-11134103-7r98o-lp6pifabsg2687.webp"
-                                          alt="rating" class="rating-media-list__zoomed-image-item"></li>
-                                      <li
-                                        class="rating-media-list-image-carousel__item rating-media-list-image-carousel__item--fluid"
-                                        style="padding: 0px 0.625rem;"><img
-                                          src="https://down-bs-vn.img.susercontent.com/vn-11134103-7r98o-lp6pifac7wb2fd.webp"
-                                          alt="rating" class="rating-media-list__zoomed-image-item"></li>
-                                      <li
-                                        class="rating-media-list-image-carousel__item rating-media-list-image-carousel__item--fluid"
-                                        style="padding: 0px 0.625rem;"><img
-                                          src="https://down-bs-vn.img.susercontent.com/vn-11134103-7r98o-lp6pifabsfh71c.webp"
-                                          alt="rating" class="rating-media-list__zoomed-image-item"></li>
-                                    </ul>
-                                  </div>
-                                  <div
-                                    class="rating-media-list-carousel-arrow rating-media-list-carousel-arrow--prev rating-media-list-carousel-arrow--hint rating-media-list-carousel-arrow--hidden"
-                                    role="button" tabindex="0"
-                                    style="opacity: 1; visibility: hidden; transform: translateX(calc(-50% + 0px));"><svg
-                                      enable-background="new 0 0 13 20" viewBox="0 0 13 20" x="0" y="0"
-                                      class="shopee-svg-icon icon-arrow-left-bold">
-                                      <polygon points="4.2 10 12.1 2.1 10 -.1 1 8.9 -.1 10 1 11 10 20 12.1 17.9">
-                                      </polygon>
-                                    </svg></div>
-                                  <div
-                                    class="rating-media-list-carousel-arrow rating-media-list-carousel-arrow--next rating-media-list-carousel-arrow--hint"
-                                    role="button" tabindex="0"
-                                    style="opacity: 1; visibility: visible; transform: translateX(calc(50% + 0px));"><svg
-                                      enable-background="new 0 0 13 21" viewBox="0 0 13 21" x="0" y="0"
-                                      class="shopee-svg-icon icon-arrow-right-bold">
-                                      <polygon points="11.1 9.9 2.1 .9 -.1 3.1 7.9 11 -.1 18.9 2.1 21 11.1 12 12.1 11">
-                                      </polygon>
-                                    </svg></div>
-                                </div>
-                              </div> -->
                             </div>
                           </div>
-                          <div class="shopee-product-rating__actions" style="justify-content: space-between">
-                            <div style="display: flex">
-                              <div class="shopee-product-rating__like-button">
-                                <like_button />
-                              </div>
-                              <div class="shopee-product-rating__like-count">
-                                hữu ích?
-                              </div>
+                        </div>
+                        <div class="shopee-product-rating__actions" style="justify-content: space-between">
+                          <div style="display: flex">
+                            <div class="shopee-product-rating__like-button">
+                              <like_button />
                             </div>
-                            <div style="display: flex">
-                              <div class="shopee-product-rating__report-menu-button">
-                                <div class="stardust-dropdown">
-                                  <div class="stardust-dropdown__item-header">
-                                    <div>
-                                      <svg width="4px" height="16px" viewBox="0 0 4 16" version="1.1"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <defs></defs>
-                                        <g stroke="none" stroke-width="1" fill-rule="evenodd">
-                                          <g transform="translate(-1301.000000, -550.000000)" fill="#CCCCCC">
-                                            <g transform="translate(155.000000, 92.000000)">
-                                              <g transform="translate(40.000000, 184.000000)">
-                                                <g transform="translate(0.000000, 161.000000)">
-                                                  <g>
-                                                    <g transform="translate(50.000000, 2.000000)">
-                                                      <path
-                                                        d="M1058,122.2 C1056.895,122.2 1056,123.096 1056,124.2 C1056,125.306 1056.895,126.202 1058,126.202 C1059.104,126.202 1060,125.306 1060,124.2 C1060,123.096 1059.104,122.2 1058,122.2 M1058,116.6 C1056.895,116.6 1056,117.496 1056,118.6 C1056,119.706 1056.895,120.602 1058,120.602 C1059.104,120.602 1060,119.706 1060,118.6 C1060,117.496 1059.104,116.6 1058,116.6 M1058,111 C1056.895,111 1056,111.896 1056,113 C1056,114.106 1056.895,115.002 1058,115.002 C1059.104,115.002 1060,114.106 1060,113 C1060,111.896 1059.104,111 1058,111">
-                                                      </path>
-                                                    </g>
+                            <div class="shopee-product-rating__like-count">
+                              hữu ích?
+                            </div>
+                          </div>
+                          <div style="display: flex">
+                            <div class="shopee-product-rating__report-menu-button">
+                              <div class="stardust-dropdown">
+                                <div class="stardust-dropdown__item-header">
+                                  <div>
+                                    <svg width="4px" height="16px" viewBox="0 0 4 16" version="1.1"
+                                      xmlns="http://www.w3.org/2000/svg">
+                                      <defs></defs>
+                                      <g stroke="none" stroke-width="1" fill-rule="evenodd">
+                                        <g transform="translate(-1301.000000, -550.000000)" fill="#CCCCCC">
+                                          <g transform="translate(155.000000, 92.000000)">
+                                            <g transform="translate(40.000000, 184.000000)">
+                                              <g transform="translate(0.000000, 161.000000)">
+                                                <g>
+                                                  <g transform="translate(50.000000, 2.000000)">
+                                                    <path
+                                                      d="M1058,122.2 C1056.895,122.2 1056,123.096 1056,124.2 C1056,125.306 1056.895,126.202 1058,126.202 C1059.104,126.202 1060,125.306 1060,124.2 C1060,123.096 1059.104,122.2 1058,122.2 M1058,116.6 C1056.895,116.6 1056,117.496 1056,118.6 C1056,119.706 1056.895,120.602 1058,120.602 C1059.104,120.602 1060,119.706 1060,118.6 C1060,117.496 1059.104,116.6 1058,116.6 M1058,111 C1056.895,111 1056,111.896 1056,113 C1056,114.106 1056.895,115.002 1058,115.002 C1059.104,115.002 1060,114.106 1060,113 C1060,111.896 1059.104,111 1058,111">
+                                                    </path>
                                                   </g>
                                                 </g>
                                               </g>
                                             </g>
                                           </g>
                                         </g>
-                                      </svg>
-                                    </div>
+                                      </g>
+                                    </svg>
                                   </div>
-                                  <div class="stardust-dropdown__item-body">
-                                    <div class="shopee-product-rating__report-menu-dropdown">
-                                      báo cáo
-                                    </div>
+                                </div>
+                                <div class="stardust-dropdown__item-body">
+                                  <div class="shopee-product-rating__report-menu-dropdown">
+                                    báo cáo
                                   </div>
                                 </div>
                               </div>
@@ -751,41 +636,34 @@ const images = data.value.images.map(s => s.trim());
                       </div>
                     </div>
                   </div>
-                  <div class="shopee-page-controller product-ratings__page-controller">
-                    <button class="shopee-icon-button shopee-icon-button--left">
-                      <svg enable-background="new 0 0 11 11" viewBox="0 0 11 11" x="0" y="0"
-                        class="shopee-svg-icon icon-arrow-left">
-                        <g>
-                          <path
-                            d="m8.5 11c-.1 0-.2 0-.3-.1l-6-5c-.1-.1-.2-.3-.2-.4s.1-.3.2-.4l6-5c .2-.2.5-.1.7.1s.1.5-.1.7l-5.5 4.6 5.5 4.6c.2.2.2.5.1.7-.1.1-.3.2-.4.2z">
-                          </path>
-                        </g>
-                      </svg></button><button class="shopee-button-solid shopee-button-solid--primary">
-                      1</button><button class="shopee-button-no-outline">2</button><button
-                      class="shopee-button-no-outline">3</button><button
-                      class="shopee-button-no-outline">4</button><button
-                      class="shopee-button-no-outline">5</button><button
-                      class="shopee-button-no-outline shopee-button-no-outline--non-click">
-                      ...</button><button class="shopee-icon-button shopee-icon-button--right">
-                      <svg enable-background="new 0 0 11 11" viewBox="0 0 11 11" x="0" y="0"
-                        class="shopee-svg-icon icon-arrow-right">
-                        <path
-                          d="m2.5 11c .1 0 .2 0 .3-.1l6-5c .1-.1.2-.3.2-.4s-.1-.3-.2-.4l-6-5c-.2-.2-.5-.1-.7.1s-.1.5.1.7l5.5 4.6-5.5 4.6c-.2.2-.2.5-.1.7.1.1.3.2.4.2z">
-                        </path>
-                      </svg>
-                    </button>
-                  </div>
+                </div>
+                <div class="shopee-page-controller product-ratings__page-controller">
+                  <button class="shopee-icon-button shopee-icon-button--left">
+                    <arrow_left_icon />
+                  </button><button class="shopee-button-solid shopee-button-solid--primary">
+                    1</button><button class="shopee-button-no-outline">2</button><button
+                    class="shopee-button-no-outline">3</button><button class="shopee-button-no-outline">4</button><button
+                    class="shopee-button-no-outline">5</button><button
+                    class="shopee-button-no-outline shopee-button-no-outline--non-click">
+                    ...</button><button class="shopee-icon-button shopee-icon-button--right">
+                    <svg enable-background="new 0 0 11 11" viewBox="0 0 11 11" x="0" y="0"
+                      class="shopee-svg-icon icon-arrow-right">
+                      <path
+                        d="m2.5 11c .1 0 .2 0 .3-.1l6-5c .1-.1.2-.3.2-.4s-.1-.3-.2-.4l-6-5c-.2-.2-.5-.1-.7.1s-.1.5.1.7l5.5 4.6-5.5 4.6c-.2.2-.2.5-.1.7.1.1.3.2.4.2z">
+                      </path>
+                    </svg>
+                  </button>
                 </div>
               </div>
             </div>
           </div>
-          <div>
-            <div style="height: 1px"></div>
-          </div>
         </div>
-        <div class="page-product__content--right">
-          <div style="display: contents"></div>
+        <div>
+          <div style="height: 1px"></div>
         </div>
+      </div>
+      <div class="page-product__content--right">
+        <div style="display: contents"></div>
       </div>
     </div>
   </div>
@@ -969,25 +847,6 @@ const images = data.value.images.map(s => s.trim());
   display: flex;
   padding: 1.6rem 0 1.6rem 2rem;
   align-items: flex-start;
-}
-
-.shopee-product-rating__avatar {
-  width: 4rem;
-  margin-right: 1rem;
-  text-align: center;
-}
-
-.shopee-product-rating__avatar .shopee-avatar {
-  border: 0;
-  width: 4rem;
-  height: 4rem;
-}
-
-.shopee-avatar {
-  display: inline-block;
-  position: relative;
-  border-radius: 50%;
-  box-sizing: border-box;
 }
 
 .shopee-product-rating__rating .icon-rating-solid {
