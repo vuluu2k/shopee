@@ -13,6 +13,7 @@ import star_fill_icon from '@/assets/icon/star_fill_icon.svg?component';
 import icon_loading_image from '@/assets/icon/icon_loading_image.svg?component';
 import like_button from '@/assets/icon/like_button.svg?component';
 import arrow_left_icon from '@/assets/icon/arrow_left_icon.svg?component';
+import arrow_right_icon from '@/assets/icon/arrow_right_icon.svg?component';
 
 const route = useRoute();
 const { slug } = route.params;
@@ -21,7 +22,7 @@ const { data } = await useFetch(
   `http://127.0.0.1:8000/api/v1/products/${slug}`,
 );
 console.log(data.value);
-const { name, price, feedbacks, variations } = data.value;
+const { name, price, feedbacks, variations, total_sold, average_rating } = data.value;
 
 const feedbackCount = feedbacks.length;
 const images = data.value.images.map(s => s.trim());
@@ -89,9 +90,9 @@ onMounted(() => {
         <div class="flex-auto">
           <div class="flex mt-12 mr-5">
             <button class="flex pr-10">
-              <div class="underline text-red-600 text-2xl">5.0</div>
+              <div class="underline text-red-600 text-2xl">{{ average_rating }}</div>
               <div class="nTpKes">
-                <star-rating :value="2.8" />
+                <star-rating :value="average_rating" />
               </div>
             </button>
             <div>
@@ -101,7 +102,7 @@ onMounted(() => {
               </button>
             </div>
             <button class="flex px-10">
-              <div class="text-2xl border-b-2">2k9</div>
+              <div class="text-2xl border-b-2">{{ total_sold }}</div>
               <div class="text-2xl ml-2">Đã bán</div>
             </button>
             <div class="ml-auto">
@@ -180,7 +181,7 @@ onMounted(() => {
             </section>
             <div class="flex mb-0 last:mb-0 pb-3.75">
               <div class="flex flex-col">
-                <section v-for="(group, index) in groupedVariations" :key="index" class="flex items-center"
+                <section v-for="( group, index ) in  groupedVariations " :key="index" class="flex items-center"
                   style="margin-bottom: 24px; align-items: baseline">
                   <h3
                     class="text-[#757575] w-[110px] capitalize flex-shrink-0 items-center font-normal m-0 w-40 px-4 mt-4">
@@ -188,7 +189,7 @@ onMounted(() => {
                   </h3>
                   <div
                     class="flex items-center flex flex-wrap overflow-y-auto mt-[-8px] w-[515px] max-w-[515px] max-h-[220px]">
-                    <button v-for="(variation, variationIndex) in group.variations" :key="variationIndex"
+                    <button v-for="( variation, variationIndex ) in  group.variations " :key="variationIndex"
                       class="hUWqqt text-[rgba(0,0,0,.26)] bg-[#fafafa] cursor-not-allowed" :aria-label="variation.name"
                       aria-disabled="true">
                       {{ variation.tier_variation[0].options[0] }}
@@ -492,7 +493,7 @@ onMounted(() => {
                 </div>
                 <div class="product-ratings__list" style="opacity: 1">
                   <div class="shopee-product-comment-list">
-                    <div v-for="(feedback, index) in   feedbacks  " :key="index">
+                    <div v-for="( feedback, index ) in    feedbacks   " :key="index">
                       <div class="shopee-product-rating">
                         <Avatar :value="feedback.user.avatar" />
                         <div class="shopee-product-rating__main">
@@ -532,18 +533,19 @@ onMounted(() => {
                           </div>
                           <div class="shopee-product-rating__image-list-wrapper">
                             <div class="rating-media-list">
-                              <div class="rating-media-list__container">
-                                <div class="rating-media-list__image-wrapper rating-media-list__image-wrapper--inactive">
+                              <div v-if="feedback.attachment !== 'null'" class="rating-media-list__container">
+                                <!-- <div class="rating-media-list__image-wrapper rating-media-list__image-wrapper--inactive">
                                   <div class="shopee-rating-media-list-image__wrapper">
                                     <div class="shopee-rating-media-list-image__place-holder">
                                       <icon_loading_image />
                                     </div>
                                     <div class="shopee-rating-media-list-image__content"
-                                      style="background-image: url(&quot;https://down-bs-sg.img.susercontent.com/vn-11110103-7r98o-lp6pm8wfy60d64&quot;);">
+>
                                       <div class="shopee-rating-media-list-image__content--blur"> </div>
                                     </div>
                                   </div>
-                                  <div class="rating-media-list__video-cover"><svg width="23" height="18"
+                                  <div class="rating-media-list__video-cover">
+                                    <svg width="23" height="18"
                                       viewBox="0 0 23 18" fill="none">
                                       <g filter="url(#filter0_d)">
                                         <path fill-rule="evenodd" clip-rule="evenodd"
@@ -569,8 +571,9 @@ onMounted(() => {
                                     </svg>
                                     <span>0:07</span>
                                   </div>
-                                </div>
-                                <div v-for="(image, attachmentIndex) in feedback.attachment.split(',').map(s => s.trim())"
+                                </div> -->
+                                <div
+                                  v-for="( image, attachmentIndex ) in  feedback.attachment.split(',').map(s => s.trim()) "
                                   :key="`attachment-${attachmentIndex}`"
                                   class="rating-media-list__image-wrapper rating-media-list__image-wrapper--inactive">
                                   <div class="shopee-rating-media-list-image__wrapper">
@@ -586,47 +589,47 @@ onMounted(() => {
                               </div>
                             </div>
                           </div>
-                        </div>
-                        <div class="shopee-product-rating__actions" style="justify-content: space-between">
-                          <div style="display: flex">
-                            <div class="shopee-product-rating__like-button">
-                              <like_button />
+                          <div class="shopee-product-rating__actions" style="justify-content: space-between">
+                            <div style="display: flex">
+                              <div class="shopee-product-rating__like-button">
+                                <like_button />
+                              </div>
+                              <div class="shopee-product-rating__like-count">
+                                hữu ích?
+                              </div>
                             </div>
-                            <div class="shopee-product-rating__like-count">
-                              hữu ích?
-                            </div>
-                          </div>
-                          <div style="display: flex">
-                            <div class="shopee-product-rating__report-menu-button">
-                              <div class="stardust-dropdown">
-                                <div class="stardust-dropdown__item-header">
-                                  <div>
-                                    <svg width="4px" height="16px" viewBox="0 0 4 16" version="1.1"
-                                      xmlns="http://www.w3.org/2000/svg">
-                                      <defs></defs>
-                                      <g stroke="none" stroke-width="1" fill-rule="evenodd">
-                                        <g transform="translate(-1301.000000, -550.000000)" fill="#CCCCCC">
-                                          <g transform="translate(155.000000, 92.000000)">
-                                            <g transform="translate(40.000000, 184.000000)">
-                                              <g transform="translate(0.000000, 161.000000)">
-                                                <g>
-                                                  <g transform="translate(50.000000, 2.000000)">
-                                                    <path
-                                                      d="M1058,122.2 C1056.895,122.2 1056,123.096 1056,124.2 C1056,125.306 1056.895,126.202 1058,126.202 C1059.104,126.202 1060,125.306 1060,124.2 C1060,123.096 1059.104,122.2 1058,122.2 M1058,116.6 C1056.895,116.6 1056,117.496 1056,118.6 C1056,119.706 1056.895,120.602 1058,120.602 C1059.104,120.602 1060,119.706 1060,118.6 C1060,117.496 1059.104,116.6 1058,116.6 M1058,111 C1056.895,111 1056,111.896 1056,113 C1056,114.106 1056.895,115.002 1058,115.002 C1059.104,115.002 1060,114.106 1060,113 C1060,111.896 1059.104,111 1058,111">
-                                                    </path>
+                            <div style="display: flex">
+                              <div class="shopee-product-rating__report-menu-button">
+                                <div class="stardust-dropdown">
+                                  <div class="stardust-dropdown__item-header">
+                                    <div>
+                                      <svg width="4px" height="16px" viewBox="0 0 4 16" version="1.1"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <defs></defs>
+                                        <g stroke="none" stroke-width="1" fill-rule="evenodd">
+                                          <g transform="translate(-1301.000000, -550.000000)" fill="#CCCCCC">
+                                            <g transform="translate(155.000000, 92.000000)">
+                                              <g transform="translate(40.000000, 184.000000)">
+                                                <g transform="translate(0.000000, 161.000000)">
+                                                  <g>
+                                                    <g transform="translate(50.000000, 2.000000)">
+                                                      <path
+                                                        d="M1058,122.2 C1056.895,122.2 1056,123.096 1056,124.2 C1056,125.306 1056.895,126.202 1058,126.202 C1059.104,126.202 1060,125.306 1060,124.2 C1060,123.096 1059.104,122.2 1058,122.2 M1058,116.6 C1056.895,116.6 1056,117.496 1056,118.6 C1056,119.706 1056.895,120.602 1058,120.602 C1059.104,120.602 1060,119.706 1060,118.6 C1060,117.496 1059.104,116.6 1058,116.6 M1058,111 C1056.895,111 1056,111.896 1056,113 C1056,114.106 1056.895,115.002 1058,115.002 C1059.104,115.002 1060,114.106 1060,113 C1060,111.896 1059.104,111 1058,111">
+                                                      </path>
+                                                    </g>
                                                   </g>
                                                 </g>
                                               </g>
                                             </g>
                                           </g>
                                         </g>
-                                      </g>
-                                    </svg>
+                                      </svg>
+                                    </div>
                                   </div>
-                                </div>
-                                <div class="stardust-dropdown__item-body">
-                                  <div class="shopee-product-rating__report-menu-dropdown">
-                                    báo cáo
+                                  <div class="stardust-dropdown__item-body">
+                                    <div class="shopee-product-rating__report-menu-dropdown">
+                                      báo cáo
+                                    </div>
                                   </div>
                                 </div>
                               </div>
@@ -646,12 +649,7 @@ onMounted(() => {
                     class="shopee-button-no-outline">5</button><button
                     class="shopee-button-no-outline shopee-button-no-outline--non-click">
                     ...</button><button class="shopee-icon-button shopee-icon-button--right">
-                    <svg enable-background="new 0 0 11 11" viewBox="0 0 11 11" x="0" y="0"
-                      class="shopee-svg-icon icon-arrow-right">
-                      <path
-                        d="m2.5 11c .1 0 .2 0 .3-.1l6-5c .1-.1.2-.3.2-.4s-.1-.3-.2-.4l-6-5c-.2-.2-.5-.1-.7.1s-.1.5.1.7l5.5 4.6-5.5 4.6c-.2.2-.2.5-.1.7.1.1.3.2.4.2z">
-                      </path>
-                    </svg>
+                    <arrow_right_icon />
                   </button>
                 </div>
               </div>
